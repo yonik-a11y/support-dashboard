@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yuki & Lucy — Openstaande tickets</title>
+<title>Yuki & Lucy — Support trend-bewaking</title>
 <style>
-  :root{--ink:#1E1E1E;--orange:#F47000;--purple:#4D39D0;--teal:#25BE88;--pink:#D7417E;--cyan:#4EB6D9;--blue:#1D55CC;--lime:#DEEE8B;--grey:#F6F6F6;--line:#E4E4E4;--muted:#5B5B5B;--white:#fff;}
+  :root{--ink:#1E1E1E;--orange:#F47000;--purple:#4D39D0;--teal:#25BE88;--pink:#D7417E;--cyan:#4EB6D9;--blue:#1D55CC;--grey:#F6F6F6;--line:#E4E4E4;--muted:#5B5B5B;--white:#fff;}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:"Nunito Sans",-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--grey);line-height:1.5}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
@@ -15,41 +15,62 @@
   .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--orange)}
   .brand small{font-weight:400;color:#9A9A9A;font-family:"Nunito Sans",sans-serif;font-size:13px;margin-left:4px}
   .seg{display:flex;background:#2A2A2A;border-radius:999px;padding:3px}
-  .seg button{border:0;background:transparent;color:#C9C9C9;font:inherit;font-size:13px;font-weight:700;padding:6px 20px;border-radius:999px;cursor:pointer;transition:.15s}
+  .seg button{border:0;background:transparent;color:#C9C9C9;font:inherit;font-size:13px;font-weight:700;padding:6px 20px;border-radius:999px;cursor:pointer}
   .seg button.on{background:var(--orange);color:#fff}
-  h1{font-family:"Ubuntu",sans-serif;font-size:30px;font-weight:700;margin:28px 0 4px}
-  .lead{color:var(--muted);font-size:15px;margin-bottom:22px}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
-  .stat{background:var(--white);border-radius:12px;padding:16px}
-  .stat .n{font-family:"Ubuntu",sans-serif;font-size:26px;font-weight:700}
-  .stat .l{font-size:12px;color:var(--muted);margin-top:2px}
-  .ssub{font-family:"Ubuntu",sans-serif;font-size:20px;font-weight:700;margin:26px 0 14px}
-  .cl{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px}
+  h1{font-family:"Ubuntu",sans-serif;font-size:28px;font-weight:700;margin:26px 0 4px}
+  .lead{color:var(--muted);font-size:15px;margin-bottom:18px}
+  .controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:20px}
+  .controls label{font-size:13px;font-weight:700;color:var(--muted)}
+  .controls select{font:inherit;font-size:14px;padding:8px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--white);cursor:pointer}
+  .controls select:focus{outline:none;border-color:var(--orange)}
+  .hintdag{font-size:12px;color:var(--muted)}
+  .pill-spike{display:inline-block;font-size:11px;font-weight:700;background:#FCEBEB;color:#A32D2D;padding:2px 8px;border-radius:999px;margin-left:6px}
+  .ssub{font-family:"Ubuntu",sans-serif;font-size:19px;font-weight:700;margin:28px 0 12px;display:flex;align-items:center;gap:9px}
+  .banner{border-radius:14px;padding:18px 20px;margin:16px 0;display:flex;gap:16px;align-items:flex-start}
+  .banner.alarm{background:#FCEBEB;border:1px solid #E3A6A6}
+  .banner.ok{background:#E1F5EE;border:1px solid #9FE1CB}
+  .banner .ic{font-size:24px;line-height:1.2}
+  .banner h2{font-family:"Ubuntu",sans-serif;font-size:16px;margin-bottom:8px}
+  .banner.alarm h2{color:#A32D2D}.banner.ok h2{color:#0F6E56}
+  .sp{font-size:14px;margin:6px 0;color:#333;padding-left:2px}
+  .sp b{color:var(--ink)}
+  .sp .z{font-family:ui-monospace,monospace;font-size:12px;background:#fff;border:1px solid #E3A6A6;border-radius:4px;padding:1px 6px;color:#A32D2D;margin-left:4px}
+  .sp .tm{color:var(--muted);font-size:13px}
+  .nieuw{background:#EEF7FF;border:1px solid #B5D4F4;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .nieuw .nt{font-weight:700;font-size:14px;color:#0C447C}
+  .nieuw .nd{font-size:13px;color:var(--muted);margin-top:2px}
+  .trend{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:10px;display:flex;align-items:center;gap:16px}
+  .trend .info{flex:1}.trend .tn{font-weight:700;font-size:14px}.trend .td{font-size:12.5px;color:var(--muted)}
+  .badge-up{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#FAEEDA;color:#854F0B;white-space:nowrap}
+  .spark{display:flex;align-items:flex-end;gap:2px;height:32px}
+  .spark .bar{width:6px;background:var(--cyan);border-radius:2px 2px 0 0;min-height:2px}
+  .spark .bar.last{background:var(--orange)}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+  .stat{background:var(--white);border-radius:12px;padding:15px}
+  .stat .n{font-family:"Ubuntu",sans-serif;font-size:24px;font-weight:700}.stat .l{font-size:12px;color:var(--muted)}
+  .cl{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:17px 20px;margin-bottom:12px}
+  .cl.done{opacity:.72}
   .cl .h{display:flex;align-items:flex-start;gap:12px;justify-content:space-between}
-  .cl .nm{font-family:"Ubuntu",sans-serif;font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px}
-  .chip{width:26px;height:26px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+  .cl .nm{font-family:"Ubuntu",sans-serif;font-size:16px;font-weight:700;display:flex;align-items:center;gap:10px}
+  .chip{width:25px;height:25px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
   .act{font-size:12px;font-weight:700;padding:4px 11px;border-radius:999px;white-space:nowrap}
-  .a-macro{background:#E1F5EE;color:#0F6E56}
-  .a-deels{background:#FAEEDA;color:#854F0B}
-  .a-uitzoeken{background:#EAF1FB;color:#1D55CC}
-  .a-route{background:#F1EFE8;color:#444}
-  .meta{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0;font-size:13px;color:var(--muted)}
-  .meta b{color:var(--ink)}
-  .symp{font-size:14px;margin:8px 0;color:#333}
-  .advies{font-size:13px;background:var(--grey);border-radius:9px;padding:10px 12px;margin-top:10px}
-  .advies b{color:var(--orange)}
+  .a-macro{background:#E1F5EE;color:#0F6E56}.a-deels{background:#FAEEDA;color:#854F0B}.a-uitzoeken{background:#EAF1FB;color:#1D55CC}.a-route{background:#F1EFE8;color:#444}
+  .meta{display:flex;gap:18px;flex-wrap:wrap;margin:11px 0;font-size:13px;color:var(--muted)}.meta b{color:var(--ink)}
+  .symp{font-size:13.5px;margin:7px 0;color:#333}
+  .advies{font-size:13px;background:var(--grey);border-radius:9px;padding:10px 12px;margin-top:10px}.advies b{color:var(--orange)}
   .ids{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
   .ids .lab{font-size:12px;color:var(--muted);margin-bottom:6px}
-  .ids .tid{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#EAF1FB;color:var(--blue);padding:3px 8px;border-radius:5px;margin:0 5px 5px 0;display:inline-block;text-decoration:none;border:1px solid transparent;transition:.12s}
+  .ids .tid{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#EAF1FB;color:var(--blue);padding:3px 8px;border-radius:5px;margin:0 5px 5px 0;display:inline-block;text-decoration:none;border:1px solid transparent}
   .ids .tid:hover{border-color:var(--blue);background:#DCE9FB}
   .copy{font:inherit;font-size:12px;font-weight:700;color:var(--blue);background:transparent;border:0;cursor:pointer;padding:0;margin-top:6px}
-  footer{color:var(--muted);font-size:12px;text-align:center;padding:30px 0}
+  .note{background:#FFF7F0;border:1px solid #F5C4B3;border-radius:10px;padding:11px 14px;font-size:12px;color:#712B13;margin:16px 0}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:28px 0}
   @media(max-width:680px){.stats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-  <div class="brand"><span class="dot"></span> Support dashboard <small>Openstaande tickets &middot; per merk</small></div>
+  <div class="brand"><span class="dot"></span> Support dashboard <small>Trend-bewaking &amp; clustering</small></div>
   <div class="seg" role="group" aria-label="Kies merk">
     <button id="b-Yuki" class="on" onclick="setBrand('Yuki')">Yuki</button>
     <button id="b-Lucy" onclick="setBrand('Lucy')">Lucy</button>
@@ -57,57 +78,116 @@
 </div></header>
 
 <div class="wrap">
-  <h1 id="title">Openstaande tickets — Yuki</h1>
-  <p class="lead">Semantisch geclusterd, zodat je in bulk kunt afhandelen. Klik op een ticket-ID om het in Freshdesk te openen.</p>
-  <div id="stats" class="stats"></div>
-  <div class="ssub">Geïdentificeerde clusters</div>
-  <div id="report"></div>
-</div>
+  <h1 id="title">Trend-bewaking — Yuki</h1>
+  <p class="lead">Het dashboard meet de dagelijkse instroom per symptoom en signaleert statistisch afwijkende pieken (z-score t.o.v. een normale weekdag). Kies een dag om te zien hoe de bewaking die dag beoordeelde.</p>
 
-<footer>Yuki Support Dashboard &middot; Fase 1: Backlog Clustering &middot; momentopname openstaande tickets</footer>
+  <div class="controls">
+    <label for="dagkiezer">Beoordeel dag:</label>
+    <select id="dagkiezer" onchange="kiesDag(this.value)"></select>
+    <span class="hintdag" id="daghint"></span>
+  </div>
+
+  <div id="banner"></div>
+  <div id="nieuw-wrap"></div>
+  <div id="trends-wrap"></div>
+
+  <div class="ssub"><span>📋</span> Openstaande tickets — clusters om af te handelen</div>
+  <div id="stats" class="stats"></div>
+  <div id="report"></div>
+
+  <div class="note" id="datanote"></div>
+</div>
+<footer>Yuki Support Dashboard · trend-detectie (z-score) + backlog-clustering · data 1–27 juni 2026</footer>
 
 <script>
-const DATA = {"Yuki": {"brand": "Yuki", "total": 203, "clusters": [{"naam": "Peppol: facturen komen niet aan / worden niet verzonden", "filter": "Peppol / e-facturatie", "symptoom": "Verkoopfacturen verzonden via Peppol komen niet aan bij de ontvanger, of inkomende Peppol-facturen verschijnen niet in Yuki ondanks 'acknowledged' status; ook bijlagen bij Peppol-facturen ontbreken.", "ids": [432111, 432129, 432265, 432972, 433407, 433543, 433554, 433754, 433802, 434172, 432983], "actie": "uitzoeken", "advies": "Mogelijk deels structureel. Bundel als technisch onderzoekscluster voor het Peppol-team; controleer doorstroom en acknowledgements. Stuur tussentijdse statusupdate i.p.v. macro."}, {"naam": "Codabox / CARO-bestanden komen niet of foutief binnen", "filter": "Bank", "symptoom": "CARO- en Codabox-bestanden (bankafschriften, mastercard) komen niet binnen in Yuki ondanks actieve connectie, of geven foutmeldingen bij verwerking; soms belanden ze in het verkeerde dossier.", "ids": [432121, 432501, 432596, 432650, 433321, 433602, 433633, 433752, 433878, 434203, 434205, 432989], "actie": "uitzoeken", "advies": "Per dossier verifiëren of Codabox-connectie actief is. Bundel de structurele doorstroomproblemen voor het bank/koppelingen-team; statusupdate i.p.v. macro."}, {"naam": "Inconsistenties in dossier (controlegetallen, saldo)", "filter": "Boekhouding", "symptoom": "Dossiers tonen een inconsistentie die niet verdwijnt, ook niet na klikken op 'herstel'; vaak rond banktransacties, openstaande posten of na een btw-aangifte.", "ids": [432137, 432144, 432670, 432814, 433383, 433099, 434117], "actie": "uitzoeken", "advies": "Inhoudelijk-boekhoudkundig; toewijzen aan specialist. Bundel voor patroonanalyse — mogelijk onderliggende oorzaak in de verwerkingslogica."}, {"naam": "Afpunten / matchen van betalingen werkt niet correct", "filter": "Betalingen", "symptoom": "Betalingen worden niet of foutief afgepunt: Yuki matcht enkel het bedrag excl. btw, of een factuur blijft deels openstaan na automatische koppeling met de betaling.", "ids": [432276, 432623, 432687, 432755, 432971, 433466, 433509, 433694, 433763], "actie": "uitzoeken", "advies": "Mogelijk deels structureel (matching-engine). Bundel voor technisch onderzoek; per dossier verifiëren of het instelling of bug is."}, {"naam": "BTW foutief verwerkt in de boeking", "filter": "BTW", "symptoom": "Yuki boekt facturen zonder of met verkeerd btw-bedrag: het btw-bedrag verdwijnt in de boeking terwijl de factuur correct is, of btw wordt niet automatisch afgetrokken ondanks juiste instelling.", "ids": [432186, 432798, 433008, 433075, 433610, 433637, 434190, 432726], "actie": "uitzoeken", "advies": "Mogelijk een weergave- of verwerkingsbug (bedrag klopt in detail maar niet in overzicht). Bundel voor tech-onderzoek; verzamel de printscreens per dossier."}, {"naam": "Activa & afschrijvingen: foutieve tabel of berekening", "filter": "Activa & afschrijvingen", "symptoom": "De afschrijvingstabel klopt niet: verschillen tussen boekjaren, afschrijving op terreinen die niet zou mogen, of de activatabel valt niet op het juiste totaal.", "ids": [432170, 432810, 432919, 432986, 433119, 433749, 433813, 433843, 434130, 433949], "actie": "uitzoeken", "advies": "Inhoudelijke boekhoudvragen. Toewijzen aan specialist; documenteer correcte werkwijze rond activatabel en uitboeken."}, {"naam": "Koppelingen met externe software (Teamleader, Lightspeed, Shopify, Robaws, Dropbox)", "filter": "Koppelingen", "symptoom": "Externe koppelingen werken niet of onvolledig: facturen komen op verkeerde grootboekrekening binnen, transacties komen maar deels door, of de koppeling stopt met werken.", "ids": [432550, 432632, 433511, 433688, 433859, 433916, 433918, 434179, 433573], "actie": "uitzoeken", "advies": "Per koppeling verschillend; toewijzen aan API/koppelingen-team. Houd commerciële integratievragen apart van echte bugs."}, {"naam": "API-koppeling: vragen, limieten en credentials", "filter": "API", "symptoom": "Vragen over API-koppelingen (Odoo, Ponto, webservices), of de foutmelding 'Daily limit exceeded' / 'dagelijkse limiet voor synchronisaties bereikt' bij Silverfin en andere tools.", "ids": [432332, 433222, 433342, 433344, 433452, 433708, 433900, 434197, 433343], "actie": "deels macro", "advies": "De limiet-meldingen zijn deels macro-baar (uitleg + verhoging aanvragen). Echte integratievragen naar het API-team; kandidaat voor helpcenter-artikel over API-limieten."}, {"naam": "Inloggen / toegang tot dossier of portaal lukt niet", "filter": "Toegang & login", "symptoom": "Gebruikers raken niet ingelogd, lopen vast op stap 1 bij het aanmaken van een dossier, of de ondernemer geraakt niet op het portaal.", "ids": [432187, 432559, 433442, 433711, 433751], "actie": "deels macro", "advies": "Routine-toegangsvragen zijn macro-baar; echte blokkades naar tech. Kandidaat voor helpcenter-artikel over inloggen en portaaltoegang."}, {"naam": "Documenten/facturen niet zichtbaar of niet downloadbaar", "filter": "Documenten", "symptoom": "Facturen of documenten zijn niet zichtbaar in Yuki, kunnen niet gedownload worden (zip, audit-bestand, XAF), of het voorbeeld van een document ontbreekt.", "ids": [432115, 433234, 433242, 433272, 433706, 433786, 434076, 433937, 433699], "actie": "uitzoeken", "advies": "Splits per symptoom: echte zichtbaarheidsbugs naar tech, exportvragen deels macro-baar. Kandidaat voor helpcenter-artikel over exporteren."}, {"naam": "Verkoopfacturen / offertes versturen lukt niet", "filter": "Verkoop", "symptoom": "Facturen of offertes kunnen niet via e-mail naar de klant verstuurd worden, lopen vast bij beide sjablonen, of geven een foutmelding bij verzending.", "ids": [433387, 433795], "actie": "uitzoeken", "advies": "Mogelijke storing op verzending (meerdere klanten). Check prioriteit op acute spike; statusupdate i.p.v. macro."}, {"naam": "Dossieroverdracht / overname / archiveren", "filter": "Dossieroverdracht", "symptoom": "Vragen rond het overnemen, overzetten, exporteren of heractiveren van dossiers, vaak bij wisseling van boekhouder of fusie van vennootschappen.", "ids": [432773, 432778, 433130, 433201, 433629, 433739, 433787, 434133, 434199], "actie": "deels macro", "advies": "Procesvragen rond overdracht zijn deels te standaardiseren. Verwijs naar bestaand support-artikel; bundel de echte overzet-fouten naar tech."}, {"naam": "Resultaatverwerking / overgedragen winst-verlies", "filter": "Resultaatverwerking", "symptoom": "Het overgedragen verlies of de overgedragen winst klopt niet of verdwijnt niet, vaak zichtbaar als verschil tussen Yuki en Silverfin bij de resultaatverwerking.", "ids": [433341, 433882], "actie": "uitzoeken", "advies": "Complexe boekhoudkundige vragen. Toewijzen aan senior specialist; documenteer de juiste werkwijze."}, {"naam": "Fiches 281.50", "filter": "Fiches", "symptoom": "Vragen over fiches 281.50: waar de webinar te vinden is, of waarom een leverancier niet aangeduid kan worden voor opname op fiche.", "ids": [433364, 433605], "actie": "deels macro", "advies": "Deels uitleg-baar via macro + webinar-link. Kandidaat voor helpcenter-artikel; technische blokkades apart."}, {"naam": "SODA / loondocumenten komen niet binnen", "filter": "Koppelingen", "symptoom": "Maandelijkse SODA-loondocumenten of boekingsdocumenten voor lonen komen niet meer binnen in Yuki ondanks ingevuld btw-nummer.", "ids": [432927, 433929], "actie": "uitzoeken", "advies": "Koppelingsprobleem; toewijzen aan koppelingen-team. Verifieer activatie per dossier."}, {"naam": "Feature requests / suggesties", "filter": "Feature requests", "symptoom": "Gestructureerde suggesties die via het systeem binnenkomen ('I have a suggestion for...'), o.a. over openstaand saldo, bankrekeningen-UI en rapportage.", "ids": [432433, 433464, 434201, 432438], "actie": "geen macro", "advies": "Geen support-issue maar productfeedback. Routeer gebundeld naar Product i.p.v. individueel afhandelen."}]}, "Lucy": {"brand": "Lucy", "total": 41, "clusters": [{"naam": "Facturen versturen via Lucy mislukt / foutmelding", "filter": "Facturatie", "symptoom": "Het versturen van verkoopfacturen vanuit Lucy lukt niet of geeft een foutmelding, soms vastlopend bij beide sjablonen; in sommige gevallen worden facturen wél afgeleverd maar blijft de foutmelding komen.", "ids": [432441, 432709, 433735, 433861, 433910], "actie": "uitzoeken", "advies": "Mogelijke storing op verzending (meerdere klanten met hetzelfde symptoom). Check prioriteit op acute spike; bundel voor tech-onderzoek met statusupdate."}, {"naam": "Peppol via Lucy: registratie, ontvangst en bijlagen", "filter": "Peppol / e-facturatie", "symptoom": "Problemen met Peppol via Lucy: registratie lukt niet ('reeds elders geregistreerd'), Peppol-facturen komen niet aan, of bijlagen bij het Peppol-bestand ontbreken bij de ontvanger.", "ids": [433317, 433325, 433422, 434099], "actie": "uitzoeken", "advies": "Bundel als Peppol-onderzoekscluster voor Lucy; controleer registratie en bijlage-doorstroom. Statusupdate i.p.v. macro."}, {"naam": "Factuuropmaak: btw, datum, nummering en sjablonen", "filter": "Facturatie", "symptoom": "Diverse problemen bij het opmaken van facturen in Lucy: ongeldig btw-tarief bij afdrukvoorbeeld, factuurnummering die niet aanpasbaar is, of een factuur met afwijkende datum die niet aangemaakt kan worden.", "ids": [432399, 432572, 433020, 433624, 433798], "actie": "uitzoeken", "advies": "Splits per symptoom: nummering en datum zijn deels uitleg-baar, btw-fouten naar tech. Kandidaat voor helpcenter-artikel over factuuropmaak in Lucy."}, {"naam": "Documenten in Lucy: hernoemen, downloaden, onleesbaar", "filter": "Documenten", "symptoom": "Vragen rond documenten in Lucy: hoe documenten te hernoemen, een onleesbaar PDF-bestand ontvangen, of documenten niet meer in zip kunnen downloaden.", "ids": [432939, 433430, 433591, 433775], "actie": "deels macro", "advies": "Hernoemen en downloaden zijn macro-baar (uitleg). De onleesbare PDF's naar tech. Kandidaat voor helpcenter-artikel."}, {"naam": "Codabox / bank-koppeling in Lucy", "filter": "Bank", "symptoom": "Codabox-connectie in Lucy is verbroken en kan niet vernieuwd worden, of vragen over hoe de klant de Codabox-koppeling moet organiseren binnen Lucy.", "ids": [433245, 433448], "actie": "deels macro", "advies": "Verifieer abonnement (Business Pro) en connectie-status. Deels uitleg-baar; structurele problemen naar koppelingen-team."}, {"naam": "Toegang & gebruikersbeheer Lucy", "filter": "Toegang & login", "symptoom": "Nieuwe gebruiker ontvangt geen uitnodigingsmail of wachtwoord-reset, of een gebruiker kan niet meer inloggen op Lucy.", "ids": [433153, 433877], "actie": "deels macro", "advies": "Routine-beheertaken zijn macro-baar; echte mailproblemen naar tech. Kandidaat voor self-service."}, {"naam": "API-koppeling met Lucy (facturatieprogramma's)", "filter": "API", "symptoom": "Externe partijen willen een API-koppeling opzetten met Lucy (eigen facturatieprogramma, Adsolut, Shopify) en vragen credentials of documentatie.", "ids": [433458, 433573, 434170], "actie": "deels macro", "advies": "Standaardproces voor API-credentials is macro-baar. Echte integratievragen naar het API-team."}]}};
+const D = {"detectie": {"Yuki": {"2026-06-08": {"spikes": [], "trends": [{"naam": "Activa / afschrijvingen", "n": 6, "gem": 2.6, "sd": 1.9, "z": 1.8, "ratio": 2.3, "timing": "09:42", "reeks": [{"dag": "2026-06-01", "n": 1}, {"dag": "2026-06-02", "n": 6}, {"dag": "2026-06-03", "n": 3}, {"dag": "2026-06-04", "n": 1}, {"dag": "2026-06-05", "n": 2}, {"dag": "2026-06-06", "n": 1}, {"dag": "2026-06-07", "n": 0}, {"dag": "2026-06-08", "n": 6}], "deze_week": 19, "vorige_week": 1}], "nieuw": [{"naam": "Activa / afschrijvingen", "n": 6, "gem": 2.6, "sd": 1.9, "z": 1.8, "ratio": 2.3, "timing": "09:42", "reeks": [{"dag": "2026-06-01", "n": 1}, {"dag": "2026-06-02", "n": 6}, {"dag": "2026-06-03", "n": 3}, {"dag": "2026-06-04", "n": 1}, {"dag": "2026-06-05", "n": 2}, {"dag": "2026-06-06", "n": 1}, {"dag": "2026-06-07", "n": 0}, {"dag": "2026-06-08", "n": 6}], "deze_week": 19, "vorige_week": 1}, {"naam": "Afpunten / matchen betaling", "n": 1, "gem": 0.6, "sd": 0.8, "z": 0.5, "ratio": 1.7, "timing": "09:02", "reeks": [{"dag": "2026-06-01", "n": 0}, {"dag": "2026-06-02", "n": 0}, {"dag": "2026-06-03", "n": 0}, {"dag": "2026-06-04", "n": 1}, {"dag": "2026-06-05", "n": 2}, {"dag": "2026-06-06", "n": 0}, {"dag": "2026-06-07", "n": 0}, {"dag": "2026-06-08", "n": 1}], "deze_week": 4, "vorige_week": 0}]}, "2026-06-09": {"spikes": [], "trends": [{"naam": "Facturen / offertes versturen mislukt", "n": 36, "gem": 25.8, "sd": 6.5, "z": 1.6, "ratio": 1.4, "timing": "07:59", "reeks": [{"dag": "2026-06-01", "n": 38}, {"dag": "2026-06-02", "n": 23}, {"dag": "2026-06-03", "n": 22}, {"dag": "2026-06-04", "n": 18}, {"dag": "2026-06-05", "n": 24}, {"dag": "2026-06-06", "n": 0}, {"dag": "2026-06-07", "n": 3}, {"dag": "2026-06-08", "n": 30}, {"dag": "2026-06-09", "n": 36}], "deze_week": 133, "vorige_week": 61}], "nieuw": [{"naam": "Afpunten / matchen betaling", "n": 2, "gem": 0.7, "sd": 0.7, "z": 1.8, "ratio": 3.0, "timing": "08:45", "reeks": [{"dag": "2026-06-01", "n": 0}, {"dag": "2026-06-02", "n": 0}, {"dag": "2026-06-03", "n": 0}, {"dag": "2026-06-04", "n": 1}, {"dag": "2026-06-05", "n": 2}, {"dag": "2026-06-06", "n": 0}, {"dag": "2026-06-07", "n": 0}, {"dag": "2026-06-08", "n": 1}, {"dag": "2026-06-09", "n": 2}], "deze_week": 6, "vorige_week": 0}]}, "2026-06-10": {"spikes": [{"naam": "Koppeling externe software", "n": 6, "gem": 1.7, "sd": 1.4, "z": 3.1, "ratio": 3.5, "timing": "11:22", "reeks": [{"dag": "2026-06-01", "n": 4}, {"dag": "2026-06-02", "n": 0}, {"dag": "2026-06-03", "n": 3}, {"dag": "2026-06-04", "n": 2}, {"dag": "2026-06-05", "n": 1}, {"dag": "2026-06-06", "n": 0}, {"dag": "2026-06-07", "n": 2}, {"dag": "2026-06-08", "n": 0}, {"dag": "2026-06-09", "n": 2}, {"dag": "2026-06-10", "n": 6}], "deze_week": 13, "vorige_week": 7}], "trends": [], "nieuw": [{"naam": "Afpunten / matchen betaling", "n": 0, "gem": 0.9, "sd": 0.8, "z": -1.0, "ratio": 0.0, "timing": null, "reeks": [{"dag": "2026-06-01", "n": 0}, {"dag": "2026-06-02", "n": 0}, {"dag": "2026-06-03", "n": 0}, {"dag": "2026-06-04", "n": 1}, {"dag": "2026-06-05", "n": 2}, {"dag": "2026-06-06", "n": 0}, {"dag": "2026-06-07", "n": 0}, {"dag": "2026-06-08", "n": 1}, {"dag": "2026-06-09", "n": 2}, {"dag": "2026-06-10", "n": 0}], "deze_week": 6, "vorige_week": 0}]}, "2026-06-11": {"spikes": [], "trends": [{"naam": "Facturen / offertes versturen mislukt", "n": 36, "gem": 27.6, "sd": 6.6, "z": 1.3, "ratio": 1.3, "timing": "06:18", "reeks": [{"dag": "2026-06-01", "n": 38}, {"dag": "2026-06-02", "n": 23}, {"dag": "2026-06-03", "n": 22}, {"dag": "2026-06-04", "n": 18}, {"dag": "2026-06-05", "n": 24}, {"dag": "2026-06-06", "n": 0}, {"dag": "2026-06-07", "n": 3}, {"dag": "2026-06-08", "n": 30}, {"dag": "2026-06-09", "n": 36}, {"dag": "2026-06-10", "n": 30}, {"dag": "2026-06-11", "n": 36}], "deze_week": 159, "vorige_week": 101}], "nieuw": [{"naam": "Afpunten / matchen betaling", "n": 0, "gem": 0.8, "sd": 0.8, "z": -0.9, "ratio": 0.0, "timing": null, "reeks": [{"dag": "2026-06-01", "n": 0}, {"dag": "2026-06-02", "n": 0}, {"dag": "2026-06-03", "n": 0}, {"dag": "2026-06-04", "n": 1}, {"dag": "2026-06-05", "n": 2}, {"dag": "2026-06-06", "n": 0}, {"dag": "2026-06-07", "n": 0}, {"dag": "2026-06-08", "n": 1}, {"dag": "2026-06-09", "n": 2}, {"dag": "2026-06-10", "n": 0}, {"dag": "2026-06-11", "n": 0}], "deze_week": 5, "vorige_week": 1}]}, "2026-06-12": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-15": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-16": {"spikes": [{"naam": "Facturen / offertes versturen mislukt", "n": 45, "gem": 29.2, "sd": 6.5, "z": 2.4, "ratio": 1.5, "timing": "08:32", "reeks": [{"dag": "2026-06-03", "n": 22}, {"dag": "2026-06-04", "n": 18}, {"dag": "2026-06-05", "n": 24}, {"dag": "2026-06-06", "n": 0}, {"dag": "2026-06-07", "n": 3}, {"dag": "2026-06-08", "n": 30}, {"dag": "2026-06-09", "n": 36}, {"dag": "2026-06-10", "n": 30}, {"dag": "2026-06-11", "n": 36}, {"dag": "2026-06-12", "n": 28}, {"dag": "2026-06-13", "n": 2}, {"dag": "2026-06-14", "n": 1}, {"dag": "2026-06-15", "n": 36}, {"dag": "2026-06-16", "n": 45}], "deze_week": 178, "vorige_week": 133}], "trends": [{"naam": "Inloggen / toegang lukt niet", "n": 7, "gem": 4.8, "sd": 1.5, "z": 1.4, "ratio": 1.5, "timing": "08:54", "reeks": [{"dag": "2026-06-03", "n": 8}, {"dag": "2026-06-04", "n": 5}, {"dag": "2026-06-05", "n": 5}, {"dag": "2026-06-06", "n": 1}, {"dag": "2026-06-07", "n": 0}, {"dag": "2026-06-08", "n": 2}, {"dag": "2026-06-09", "n": 5}, {"dag": "2026-06-10", "n": 5}, {"dag": "2026-06-11", "n": 4}, {"dag": "2026-06-12", "n": 3}, {"dag": "2026-06-13", "n": 1}, {"dag": "2026-06-14", "n": 1}, {"dag": "2026-06-15", "n": 6}, {"dag": "2026-06-16", "n": 7}], "deze_week": 27, "vorige_week": 26}], "nieuw": []}, "2026-06-17": {"spikes": [{"naam": "Inloggen / toegang lukt niet", "n": 10, "gem": 5.0, "sd": 1.6, "z": 3.2, "ratio": 2.0, "timing": "00:27", "reeks": [{"dag": "2026-06-04", "n": 5}, {"dag": "2026-06-05", "n": 5}, {"dag": "2026-06-06", "n": 1}, {"dag": "2026-06-07", "n": 0}, {"dag": "2026-06-08", "n": 2}, {"dag": "2026-06-09", "n": 5}, {"dag": "2026-06-10", "n": 5}, {"dag": "2026-06-11", "n": 4}, {"dag": "2026-06-12", "n": 3}, {"dag": "2026-06-13", "n": 1}, {"dag": "2026-06-14", "n": 1}, {"dag": "2026-06-15", "n": 6}, {"dag": "2026-06-16", "n": 7}, {"dag": "2026-06-17", "n": 10}], "deze_week": 32, "vorige_week": 23}], "trends": [], "nieuw": []}, "2026-06-18": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-19": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-22": {"spikes": [{"naam": "Afpunten / matchen betaling", "n": 4, "gem": 0.6, "sd": 0.7, "z": 4.8, "ratio": 6.7, "timing": "10:41", "reeks": [{"dag": "2026-06-09", "n": 2}, {"dag": "2026-06-10", "n": 0}, {"dag": "2026-06-11", "n": 0}, {"dag": "2026-06-12", "n": 0}, {"dag": "2026-06-13", "n": 0}, {"dag": "2026-06-14", "n": 0}, {"dag": "2026-06-15", "n": 1}, {"dag": "2026-06-16", "n": 1}, {"dag": "2026-06-17", "n": 1}, {"dag": "2026-06-18", "n": 0}, {"dag": "2026-06-19", "n": 0}, {"dag": "2026-06-20", "n": 0}, {"dag": "2026-06-21", "n": 0}, {"dag": "2026-06-22", "n": 4}], "deze_week": 6, "vorige_week": 3}], "trends": [{"naam": "Peppol komt niet aan / verzenden", "n": 11, "gem": 6.6, "sd": 2.6, "z": 1.7, "ratio": 1.7, "timing": "08:44", "reeks": [{"dag": "2026-06-09", "n": 3}, {"dag": "2026-06-10", "n": 3}, {"dag": "2026-06-11", "n": 7}, {"dag": "2026-06-12", "n": 7}, {"dag": "2026-06-13", "n": 0}, {"dag": "2026-06-14", "n": 0}, {"dag": "2026-06-15", "n": 5}, {"dag": "2026-06-16", "n": 7}, {"dag": "2026-06-17", "n": 8}, {"dag": "2026-06-18", "n": 8}, {"dag": "2026-06-19", "n": 2}, {"dag": "2026-06-20", "n": 0}, {"dag": "2026-06-21", "n": 0}, {"dag": "2026-06-22", "n": 11}], "deze_week": 36, "vorige_week": 25}], "nieuw": []}, "2026-06-23": {"spikes": [], "trends": [{"naam": "Activa / afschrijvingen", "n": 5, "gem": 2.2, "sd": 1.7, "z": 1.7, "ratio": 2.3, "timing": "09:41", "reeks": [{"dag": "2026-06-10", "n": 1}, {"dag": "2026-06-11", "n": 4}, {"dag": "2026-06-12", "n": 1}, {"dag": "2026-06-13", "n": 0}, {"dag": "2026-06-14", "n": 0}, {"dag": "2026-06-15", "n": 2}, {"dag": "2026-06-16", "n": 2}, {"dag": "2026-06-17", "n": 1}, {"dag": "2026-06-18", "n": 1}, {"dag": "2026-06-19", "n": 2}, {"dag": "2026-06-20", "n": 0}, {"dag": "2026-06-21", "n": 0}, {"dag": "2026-06-22", "n": 2}, {"dag": "2026-06-23", "n": 5}], "deze_week": 11, "vorige_week": 10}, {"naam": "Peppol komt niet aan / verzenden", "n": 11, "gem": 6.9, "sd": 2.7, "z": 1.5, "ratio": 1.6, "timing": "09:14", "reeks": [{"dag": "2026-06-10", "n": 3}, {"dag": "2026-06-11", "n": 7}, {"dag": "2026-06-12", "n": 7}, {"dag": "2026-06-13", "n": 0}, {"dag": "2026-06-14", "n": 0}, {"dag": "2026-06-15", "n": 5}, {"dag": "2026-06-16", "n": 7}, {"dag": "2026-06-17", "n": 8}, {"dag": "2026-06-18", "n": 8}, {"dag": "2026-06-19", "n": 2}, {"dag": "2026-06-20", "n": 0}, {"dag": "2026-06-21", "n": 0}, {"dag": "2026-06-22", "n": 11}, {"dag": "2026-06-23", "n": 11}], "deze_week": 40, "vorige_week": 29}], "nieuw": []}, "2026-06-24": {"spikes": [{"naam": "Afpunten / matchen betaling", "n": 4, "gem": 0.8, "sd": 1.1, "z": 3.1, "ratio": 5.2, "timing": "11:31", "reeks": [{"dag": "2026-06-11", "n": 0}, {"dag": "2026-06-12", "n": 0}, {"dag": "2026-06-13", "n": 0}, {"dag": "2026-06-14", "n": 0}, {"dag": "2026-06-15", "n": 1}, {"dag": "2026-06-16", "n": 1}, {"dag": "2026-06-17", "n": 1}, {"dag": "2026-06-18", "n": 0}, {"dag": "2026-06-19", "n": 0}, {"dag": "2026-06-20", "n": 0}, {"dag": "2026-06-21", "n": 0}, {"dag": "2026-06-22", "n": 4}, {"dag": "2026-06-23", "n": 0}, {"dag": "2026-06-24", "n": 4}], "deze_week": 8, "vorige_week": 3}], "trends": [], "nieuw": []}, "2026-06-25": {"spikes": [{"naam": "Koppeling externe software", "n": 6, "gem": 1.6, "sd": 1.6, "z": 2.8, "ratio": 3.9, "timing": "10:56", "reeks": [{"dag": "2026-06-12", "n": 1}, {"dag": "2026-06-13", "n": 0}, {"dag": "2026-06-14", "n": 0}, {"dag": "2026-06-15", "n": 0}, {"dag": "2026-06-16", "n": 1}, {"dag": "2026-06-17", "n": 0}, {"dag": "2026-06-18", "n": 0}, {"dag": "2026-06-19", "n": 3}, {"dag": "2026-06-20", "n": 0}, {"dag": "2026-06-21", "n": 0}, {"dag": "2026-06-22", "n": 1}, {"dag": "2026-06-23", "n": 2}, {"dag": "2026-06-24", "n": 2}, {"dag": "2026-06-25", "n": 6}], "deze_week": 14, "vorige_week": 2}], "trends": [{"naam": "Bankafschriften / transacties", "n": 7, "gem": 3.7, "sd": 1.8, "z": 1.9, "ratio": 1.9, "timing": "09:05", "reeks": [{"dag": "2026-06-12", "n": 4}, {"dag": "2026-06-13", "n": 1}, {"dag": "2026-06-14", "n": 0}, {"dag": "2026-06-15", "n": 1}, {"dag": "2026-06-16", "n": 5}, {"dag": "2026-06-17", "n": 4}, {"dag": "2026-06-18", "n": 0}, {"dag": "2026-06-19", "n": 1}, {"dag": "2026-06-20", "n": 0}, {"dag": "2026-06-21", "n": 0}, {"dag": "2026-06-22", "n": 4}, {"dag": "2026-06-23", "n": 4}, {"dag": "2026-06-24", "n": 4}, {"dag": "2026-06-25", "n": 7}], "deze_week": 20, "vorige_week": 15}], "nieuw": []}, "2026-06-26": {"spikes": [], "trends": [{"naam": "Koppeling externe software", "n": 5, "gem": 1.8, "sd": 1.9, "z": 1.7, "ratio": 2.8, "timing": "07:37", "reeks": [{"dag": "2026-06-13", "n": 0}, {"dag": "2026-06-14", "n": 0}, {"dag": "2026-06-15", "n": 0}, {"dag": "2026-06-16", "n": 1}, {"dag": "2026-06-17", "n": 0}, {"dag": "2026-06-18", "n": 0}, {"dag": "2026-06-19", "n": 3}, {"dag": "2026-06-20", "n": 0}, {"dag": "2026-06-21", "n": 0}, {"dag": "2026-06-22", "n": 1}, {"dag": "2026-06-23", "n": 2}, {"dag": "2026-06-24", "n": 2}, {"dag": "2026-06-25", "n": 6}, {"dag": "2026-06-26", "n": 5}], "deze_week": 16, "vorige_week": 4}], "nieuw": []}}, "Lucy": {"2026-06-08": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-09": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-10": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-11": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-12": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-15": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-16": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-17": {"spikes": [{"naam": "Peppol komt niet aan / verzenden", "n": 9, "gem": 4.2, "sd": 1.7, "z": 2.8, "ratio": 2.2, "timing": "10:23", "reeks": [{"dag": "2026-06-04", "n": 2}, {"dag": "2026-06-05", "n": 2}, {"dag": "2026-06-06", "n": 1}, {"dag": "2026-06-07", "n": 1}, {"dag": "2026-06-08", "n": 5}, {"dag": "2026-06-09", "n": 1}, {"dag": "2026-06-10", "n": 4}, {"dag": "2026-06-11", "n": 6}, {"dag": "2026-06-12", "n": 4}, {"dag": "2026-06-13", "n": 1}, {"dag": "2026-06-14", "n": 0}, {"dag": "2026-06-15", "n": 3}, {"dag": "2026-06-16", "n": 6}, {"dag": "2026-06-17", "n": 9}], "deze_week": 29, "vorige_week": 16}], "trends": [], "nieuw": []}, "2026-06-18": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-19": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-22": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-23": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-24": {"spikes": [], "trends": [], "nieuw": []}, "2026-06-25": {"spikes": [{"naam": "BTW foutief verwerkt", "n": 25, "gem": 15.9, "sd": 4.6, "z": 2.0, "ratio": 1.6, "timing": "09:38", "reeks": [{"dag": "2026-06-12", "n": 9}, {"dag": "2026-06-13", "n": 2}, {"dag": "2026-06-14", "n": 2}, {"dag": "2026-06-15", "n": 18}, {"dag": "2026-06-16", "n": 12}, {"dag": "2026-06-17", "n": 14}, {"dag": "2026-06-18", "n": 10}, {"dag": "2026-06-19", "n": 14}, {"dag": "2026-06-20", "n": 0}, {"dag": "2026-06-21", "n": 1}, {"dag": "2026-06-22", "n": 16}, {"dag": "2026-06-23", "n": 18}, {"dag": "2026-06-24", "n": 13}, {"dag": "2026-06-25", "n": 25}], "deze_week": 87, "vorige_week": 67}], "trends": [], "nieuw": []}, "2026-06-26": {"spikes": [], "trends": [], "nieuw": []}}}, "dagen": ["2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18", "2026-06-19", "2026-06-22", "2026-06-23", "2026-06-24", "2026-06-25", "2026-06-26"], "spike_dagen": {"Yuki": ["2026-06-10", "2026-06-16", "2026-06-17", "2026-06-22", "2026-06-24", "2026-06-25"], "Lucy": ["2026-06-17", "2026-06-25"]}, "clusters": {"Yuki": {"brand": "Yuki", "open_total": 303, "clusters": [{"naam": "BTW foutief verwerkt", "filter": "BTW", "actie": "uitzoeken", "advies": "Verzamel printscreens; mogelijk verwerkings- of weergavebug. Naar boekhoud-specialist.", "symptoom": "Openstaande Yuki-tickets rond: btw foutief verwerkt.", "ids": ["429974", "429975", "430323", "430343", "430361", "430616", "430871", "430903", "430931", "430973", "430991", "431133", "431179", "431243", "431450", "431516", "431733", "431819", "431882", "431892", "431919", "431944", "432093", "432111", "432129", "432137", "432144", "432156", "432176", "432222", "432276", "432282", "432327", "432342", "432459", "432559", "432630", "432670", "432687", "432735", "432755", "432773", "432782", "432798", "432903", "432919", "432989", "433008", "433074", "433075", "433130", "433131", "433203", "433272", "433278", "433344", "433383", "433442", "433610", "433620", "433627", "433637", "433638", "433644", "433694", "433752", "433762", "433765", "433829", "433859", "433929", "434029", "434107", "434117", "434190", "434205", "434206", "434229", "434291", "434333", "434391", "434427"], "open": 82}, {"naam": "Facturen / offertes versturen mislukt", "filter": "Facturatie", "actie": "uitzoeken", "advies": "Mogelijke verzendstoring; bundel voor tech-onderzoek, statusupdate i.p.v. macro.", "symptoom": "Openstaande Yuki-tickets rond: facturen / offertes versturen mislukt.", "ids": ["429476", "429983", "430136", "430453", "430475", "430485", "430552", "430729", "431204", "431406", "431546", "431547", "431558", "431593", "431626", "431774", "431778", "431802", "431908", "432057", "432078", "432115", "432121", "432139", "432243", "432257", "432446", "432531", "432546", "432550", "432597", "432626", "432669", "432684", "432726", "432806", "432814", "432879", "432972", "432984", "433073", "433082", "433175", "433177", "433178", "433201", "433234", "433270", "433280", "433285", "433287", "433290", "433387", "433407", "433543", "433609", "433618", "433621", "433640", "433758", "433763", "433812", "433813", "433916", "433943", "433950", "434201", "434222", "434255", "434283", "434361", "434392", "434405", "434431", "434443", "434445", "434452", "434456", "434458"], "open": 79}, {"naam": "Peppol komt niet aan / verzenden", "filter": "Peppol", "actie": "uitzoeken", "advies": "Controleer Peppol-doorstroom en acknowledgements. Bundel voor Peppol-team.", "symptoom": "Openstaande Yuki-tickets rond: peppol komt niet aan / verzenden.", "ids": ["427036", "430238", "431232", "431690", "431755", "431821", "431854", "431890", "431964", "432573", "432751", "432815", "432927", "432931", "432971", "432983", "433587", "433754", "433757", "433961", "434133", "434167", "434172", "434208", "434357", "434404"], "open": 26}, {"naam": "Bankafschriften / transacties", "filter": "Bank", "actie": "uitzoeken", "advies": "Splits per symptoom; rode afschriften apart.", "symptoom": "Openstaande Yuki-tickets rond: bankafschriften / transacties.", "ids": ["428372", "431432", "432289", "432650", "432812", "433281", "433321", "433600", "433602", "433629", "433804", "434116", "434385"], "open": 13}, {"naam": "Activa / afschrijvingen", "filter": "Activa", "actie": "uitzoeken", "advies": "Inhoudelijke boekhoudvragen; naar specialist.", "symptoom": "Openstaande Yuki-tickets rond: activa / afschrijvingen.", "ids": ["432170", "432778", "432810", "432986", "433119", "433553", "433772", "433949", "434130"], "open": 9}, {"naam": "Inloggen / toegang lukt niet", "filter": "Toegang", "actie": "deels macro", "advies": "Routine-toegang macro-baar; echte blokkades naar tech.", "symptoom": "Openstaande Yuki-tickets rond: inloggen / toegang lukt niet.", "ids": ["430407", "432187", "433244", "433843", "434426", "434428", "434439", "434440"], "open": 8}, {"naam": "Afpunten / matchen betaling", "filter": "Betalingen", "actie": "uitzoeken", "advies": "Mogelijk matching-engine; per dossier verifiëren.", "symptoom": "Openstaande Yuki-tickets rond: afpunten / matchen betaling.", "ids": ["432623", "432644", "432844", "433466", "433509", "433516", "433619", "434328"], "open": 8}, {"naam": "Koppeling externe software", "filter": "Koppelingen", "actie": "uitzoeken", "advies": "Per koppeling verschillend; naar API/koppelingen-team.", "symptoom": "Openstaande Yuki-tickets rond: koppeling externe software.", "ids": ["432596", "433341", "433511", "433534", "434411"], "open": 5}, {"naam": "Codabox / CARO bestanden", "filter": "Koppelingen", "actie": "uitzoeken", "advies": "Verifieer Codabox-connectie per dossier.", "symptoom": "Openstaande Yuki-tickets rond: codabox / caro bestanden.", "ids": ["432501", "433878", "434203"], "open": 3}, {"naam": "Dossieroverdracht / overname", "filter": "Overdracht", "actie": "deels macro", "advies": "Procesvragen standaardiseren; echte fouten naar tech.", "symptoom": "Openstaande Yuki-tickets rond: dossieroverdracht / overname.", "ids": ["431725", "432083"], "open": 2}]}, "Lucy": {"brand": "Lucy", "open_total": 60, "clusters": [{"naam": "BTW foutief verwerkt", "filter": "BTW", "actie": "uitzoeken", "advies": "Verzamel printscreens; mogelijk verwerkings- of weergavebug. Naar boekhoud-specialist.", "symptoom": "Openstaande Lucy-tickets rond: btw foutief verwerkt.", "ids": ["426752", "431810", "431851", "431921", "432399", "432690", "432709", "432939", "433017", "433153", "433315", "433317", "433350", "433384", "433798", "433910", "434114", "434158", "434232", "434300", "434309", "434409"], "open": 22}, {"naam": "Facturen / offertes versturen mislukt", "filter": "Facturatie", "actie": "uitzoeken", "advies": "Mogelijke verzendstoring; bundel voor tech-onderzoek, statusupdate i.p.v. macro.", "symptoom": "Openstaande Lucy-tickets rond: facturen / offertes versturen mislukt.", "ids": ["429335", "430478", "432328", "432428", "432441", "432593", "433020", "433245", "433325", "433409", "433422", "433430", "433639", "433735", "434239"], "open": 15}, {"naam": "Peppol komt niet aan / verzenden", "filter": "Peppol", "actie": "uitzoeken", "advies": "Controleer Peppol-doorstroom en acknowledgements. Bundel voor Peppol-team.", "symptoom": "Openstaande Lucy-tickets rond: peppol komt niet aan / verzenden.", "ids": ["431616", "433070", "434307", "434454"], "open": 4}, {"naam": "Koppeling externe software", "filter": "Koppelingen", "actie": "uitzoeken", "advies": "Per koppeling verschillend; naar API/koppelingen-team.", "symptoom": "Openstaande Lucy-tickets rond: koppeling externe software.", "ids": ["433573", "434249"], "open": 2}]}}};
 const ACT={"macro":{t:"\u2705 Direct bulk-baar",c:"a-macro"},"deels macro":{t:"\ud83d\udfe1 Deels bulk-baar",c:"a-deels"},"uitzoeken":{t:"\ud83d\udd0d Eerst onderzoeken",c:"a-uitzoeken"},"geen macro":{t:"\u21aa\ufe0f Routeren",c:"a-route"}};
 const CHIPCOL=["#4D39D0","#25BE88","#D7417E","#4EB6D9","#F47000","#1D55CC"];
 const FD="https://yuki.freshdesk.com/a/tickets/";
+let huidigMerk="Yuki", huidigeDag=null;
 function esc(s){return String(s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));}
+function dagNL(s){const d=new Date(s);return d.toLocaleDateString('nl-BE',{weekday:'long',day:'numeric',month:'long'});}
 
-function render(brand){
-  const d=DATA[brand];
-  const clusters=[...d.clusters].sort((a,b)=>b.ids.length-a.ids.length);
-  const geclusterd=clusters.reduce((a,c)=>a+c.ids.length,0);
-  document.getElementById("title").textContent="Openstaande tickets — "+brand;
+function spark(reeks){
+  const max=Math.max(...reeks.map(r=>r.n),1);
+  return '<div class="spark">'+reeks.map((r,i)=>{
+    const h=Math.round(r.n/max*32);const cls=i===reeks.length-1?'bar last':'bar';
+    return '<div class="'+cls+'" style="height:'+Math.max(h,2)+'px" title="'+r.dag+': '+r.n+'"></div>';}).join('')+'</div>';
+}
+function vulKiezer(){
+  const sel=document.getElementById("dagkiezer");
+  const spikeDagen=D.spike_dagen[huidigMerk]||[];
+  sel.innerHTML=D.dagen.map(d=>{
+    const heeftSpike=spikeDagen.includes(d);
+    return '<option value="'+d+'">'+dagNL(d)+(heeftSpike?'  \u26a0 piek':'')+'</option>';
+  }).join('');
+  // standaard op meest recente dag MET spike, anders laatste dag
+  const def=spikeDagen.length?spikeDagen[spikeDagen.length-1]:D.dagen[D.dagen.length-1];
+  sel.value=def; huidigeDag=def;
+}
+function kiesDag(d){huidigeDag=d;renderDetectie();}
+
+function renderDetectie(){
+  const det=(D.detectie[huidigMerk]||{})[huidigeDag]||{spikes:[],trends:[],nieuw:[]};
+  document.getElementById("daghint").textContent="(\u2014 vergeleken met normale weekdagen ervoor)";
+  // banner
+  const b=document.getElementById("banner");
+  if(det.spikes.length){
+    let h='<div class="banner alarm"><div class="ic">\ud83d\udea8</div><div><h2>Mogelijke storing — '+det.spikes.length+' symptoom'+(det.spikes.length>1?'en':'')+' piekt</h2>';
+    det.spikes.forEach(s=>{
+      h+='<p class="sp"><b>'+esc(s.naam)+'</b>: '+s.n+' tickets, normaal '+s.gem+'/weekdag <span class="z">z='+s.z+'</span>'+
+         (s.timing?' <span class="tm">\u00b7 eerste ticket om '+s.timing+'</span>':'')+'</p>';});
+    h+='<p class="sp" style="margin-top:8px;color:#A32D2D">\u2192 Onderzoek met prioriteit en informeer de ontwikkelaars.</p></div></div>';
+    b.innerHTML=h;
+  }else{
+    b.innerHTML='<div class="banner ok"><div class="ic">\u2705</div><div><h2>Geen acute piek op '+dagNL(huidigeDag)+'</h2><p class="sp">Alle symptomen zitten binnen de normale marge voor een weekdag (z &lt; 2).</p></div></div>';
+  }
+  // nieuw deze week
+  const nw=document.getElementById("nieuw-wrap");
+  if(det.nieuw && det.nieuw.length){
+    let h='<div class="ssub"><span>\u2728</span> Nieuw deze week</div>';
+    det.nieuw.forEach(n=>{h+='<div class="nieuw"><div class="nt">'+esc(n.naam)+'</div><div class="nd">'+n.deze_week+' tickets deze week, vorige week '+n.vorige_week+'. Mogelijk een nieuw probleem na een wijziging.</div></div>';});
+    nw.innerHTML=h;
+  }else nw.innerHTML='';
+  // trends
+  const tw=document.getElementById("trends-wrap");
+  if(det.trends && det.trends.length){
+    let h='<div class="ssub"><span>\ud83d\udcc8</span> Stijgende trends (let op)</div>';
+    det.trends.forEach(t=>{h+='<div class="trend">'+spark(t.reeks)+'<div class="info"><div class="tn">'+esc(t.naam)+'</div><div class="td">'+t.n+' tickets \u00b7 normaal '+t.gem+'/weekdag \u00b7 z='+t.z+'</div></div><span class="badge-up">\u2197 '+t.ratio+'\u00d7</span></div>';});
+    tw.innerHTML=h;
+  }else tw.innerHTML='';
+}
+
+function renderClusters(){
+  const c=D.clusters[huidigMerk];
   document.getElementById("stats").innerHTML=
-    '<div class="stat"><div class="n">'+d.total+'</div><div class="l">openstaande tickets</div></div>'+
-    '<div class="stat"><div class="n">'+clusters.length+'</div><div class="l">clusters gevonden</div></div>'+
-    '<div class="stat"><div class="n">'+geclusterd+'</div><div class="l">tickets geclusterd</div></div>';
+    '<div class="stat"><div class="n">'+c.open_total+'</div><div class="l">openstaande tickets</div></div>'+
+    '<div class="stat"><div class="n">'+c.clusters.length+'</div><div class="l">clusters</div></div>'+
+    '<div class="stat"><div class="n">'+c.clusters.reduce((a,x)=>a+x.open,0)+'</div><div class="l">geclusterd</div></div>';
   let h="";
-  clusters.forEach((c,i)=>{
-    const a=ACT[c.actie]||{t:c.actie,c:"a-route"};
-    const col=CHIPCOL[i%CHIPCOL.length];
-    const shown=c.ids.map(x=>'<a class="tid" href="'+FD+x+'" target="_blank" rel="noopener">#'+x+'</a>').join("");
-    const allIds=c.ids.map(x=>"#"+x).join(", ");
-    h+='<div class="cl"><div class="h"><div class="nm"><span class="chip" style="background:'+col+'">'+(i+1)+'</span>'+esc(c.naam)+'</div>'+
-       '<span class="act '+a.c+'">'+a.t+'</span></div>'+
-       '<div class="meta"><span>Hoofdfilter: <b>'+esc(c.filter)+'</b></span><span>Tickets: <b>'+c.ids.length+'</b></span></div>'+
-       '<div class="symp">'+esc(c.symptoom)+'</div>'+
-       '<div class="advies"><b>\ud83d\udca1 Bulk-actie advies:</b> '+esc(c.advies)+'</div>'+
-       '<div class="ids"><div class="lab">Betrokken ticket-ID\u2019s (klik om in Freshdesk te openen):</div>'+shown+
-       '<br><button class="copy" data-ids="'+esc(allIds)+'">\ud83d\udccb Kopieer alle '+c.ids.length+' ID\u2019s</button></div></div>';
+  c.clusters.forEach((cl,i)=>{
+    const a=ACT[cl.actie]||{t:cl.actie,c:"a-route"};const col=CHIPCOL[i%CHIPCOL.length];
+    const shown=cl.ids.map(x=>'<a class="tid" href="'+FD+x+'" target="_blank" rel="noopener">#'+x+'</a>').join("");
+    const allIds=cl.ids.map(x=>"#"+x).join(", ");
+    h+='<div class="cl"><div class="h"><div class="nm"><span class="chip" style="background:'+col+'">'+(i+1)+'</span>'+esc(cl.naam)+'</div><span class="act '+a.c+'">'+a.t+'</span></div>'+
+       '<div class="meta"><span>Hoofdfilter: <b>'+esc(cl.filter)+'</b></span><span>Openstaand: <b>'+cl.open+'</b></span></div>'+
+       '<div class="symp">'+esc(cl.symptoom)+'</div>'+
+       '<div class="advies"><b>\ud83d\udca1 Bulk-actie advies:</b> '+esc(cl.advies)+'</div>'+
+       '<div class="ids"><div class="lab">Openstaande ticket-ID\u2019s (klik om in Freshdesk te openen):</div>'+shown+
+       '<br><button class="copy" data-ids="'+esc(allIds)+'">\ud83d\udccb Kopieer alle '+cl.ids.length+' ID\u2019s</button></div></div>';
   });
   document.getElementById("report").innerHTML=h;
-  document.querySelectorAll(".copy").forEach(b=>b.onclick=()=>{
-    navigator.clipboard.writeText(b.dataset.ids);const o=b.textContent;b.textContent="\u2713 Gekopieerd!";
-    setTimeout(()=>b.textContent=o,1500);
-  });
+  document.querySelectorAll(".copy").forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.dataset.ids);const o=b.textContent;b.textContent="\u2713 Gekopieerd!";setTimeout(()=>b.textContent=o,1500);});
 }
-function setBrand(brand){
-  document.getElementById("b-Yuki").classList.toggle("on",brand==="Yuki");
-  document.getElementById("b-Lucy").classList.toggle("on",brand==="Lucy");
-  render(brand);
+function setBrand(merk){
+  huidigMerk=merk;
+  document.getElementById("b-Yuki").classList.toggle("on",merk==="Yuki");
+  document.getElementById("b-Lucy").classList.toggle("on",merk==="Lucy");
+  document.getElementById("title").textContent="Trend-bewaking — "+merk;
+  vulKiezer(); renderDetectie(); renderClusters();
+  document.getElementById("datanote").innerHTML="<b>Over deze analyse:</b> gebaseerd op 3.267 tickets (1\u201327 juni 2026). Spikes worden bepaald met een z-score: hoeveel standaarddeviaties de instroom van een symptoom afwijkt van een normale weekdag (z\u22652 = piek, z\u22651,3 = trend). Weekend en weekdag worden apart bekeken. De clustering gebruikt dezelfde symptoom-definitie als de detectie. Symptoom-herkenning gebeurt nu via trefwoorden; in productie kan dit een AI-model zijn voor fijnere semantiek.";
 }
-render("Yuki");
+setBrand("Yuki");
 </script>
 </body>
 </html>
