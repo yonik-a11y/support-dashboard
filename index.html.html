@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yuki & Lucy — Openstaande tickets</title>
+<style>
+  :root{--ink:#1E1E1E;--orange:#F47000;--purple:#4D39D0;--teal:#25BE88;--pink:#D7417E;--cyan:#4EB6D9;--blue:#1D55CC;--lime:#DEEE8B;--grey:#F6F6F6;--line:#E4E4E4;--muted:#5B5B5B;--white:#fff;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Nunito Sans",-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--grey);line-height:1.5}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header{background:var(--ink);color:#fff;padding:18px 0}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;font-family:"Ubuntu",sans-serif}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--orange)}
+  .brand small{font-weight:400;color:#9A9A9A;font-family:"Nunito Sans",sans-serif;font-size:13px;margin-left:4px}
+  .seg{display:flex;background:#2A2A2A;border-radius:999px;padding:3px}
+  .seg button{border:0;background:transparent;color:#C9C9C9;font:inherit;font-size:13px;font-weight:700;padding:6px 20px;border-radius:999px;cursor:pointer;transition:.15s}
+  .seg button.on{background:var(--orange);color:#fff}
+  h1{font-family:"Ubuntu",sans-serif;font-size:30px;font-weight:700;margin:28px 0 4px}
+  .lead{color:var(--muted);font-size:15px;margin-bottom:22px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+  .stat{background:var(--white);border-radius:12px;padding:16px}
+  .stat .n{font-family:"Ubuntu",sans-serif;font-size:26px;font-weight:700}
+  .stat .l{font-size:12px;color:var(--muted);margin-top:2px}
+  .ssub{font-family:"Ubuntu",sans-serif;font-size:20px;font-weight:700;margin:26px 0 14px}
+  .cl{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px}
+  .cl .h{display:flex;align-items:flex-start;gap:12px;justify-content:space-between}
+  .cl .nm{font-family:"Ubuntu",sans-serif;font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px}
+  .chip{width:26px;height:26px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+  .act{font-size:12px;font-weight:700;padding:4px 11px;border-radius:999px;white-space:nowrap}
+  .a-macro{background:#E1F5EE;color:#0F6E56}
+  .a-deels{background:#FAEEDA;color:#854F0B}
+  .a-uitzoeken{background:#EAF1FB;color:#1D55CC}
+  .a-route{background:#F1EFE8;color:#444}
+  .meta{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0;font-size:13px;color:var(--muted)}
+  .meta b{color:var(--ink)}
+  .symp{font-size:14px;margin:8px 0;color:#333}
+  .advies{font-size:13px;background:var(--grey);border-radius:9px;padding:10px 12px;margin-top:10px}
+  .advies b{color:var(--orange)}
+  .ids{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+  .ids .lab{font-size:12px;color:var(--muted);margin-bottom:6px}
+  .ids .tid{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#EAF1FB;color:var(--blue);padding:3px 8px;border-radius:5px;margin:0 5px 5px 0;display:inline-block;text-decoration:none;border:1px solid transparent;transition:.12s}
+  .ids .tid:hover{border-color:var(--blue);background:#DCE9FB}
+  .copy{font:inherit;font-size:12px;font-weight:700;color:var(--blue);background:transparent;border:0;cursor:pointer;padding:0;margin-top:6px}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:30px 0}
+  @media(max-width:680px){.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand"><span class="dot"></span> Support dashboard <small>Openstaande tickets &middot; per merk</small></div>
+  <div class="seg" role="group" aria-label="Kies merk">
+    <button id="b-Yuki" class="on" onclick="setBrand('Yuki')">Yuki</button>
+    <button id="b-Lucy" onclick="setBrand('Lucy')">Lucy</button>
+  </div>
+</div></header>
+
+<div class="wrap">
+  <h1 id="title">Openstaande tickets — Yuki</h1>
+  <p class="lead">Semantisch geclusterd, zodat je in bulk kunt afhandelen. Klik op een ticket-ID om het in Freshdesk te openen.</p>
+  <div id="stats" class="stats"></div>
+  <div class="ssub">Geïdentificeerde clusters</div>
+  <div id="report"></div>
+</div>
+
+<footer>Yuki Support Dashboard &middot; Fase 1: Backlog Clustering &middot; momentopname openstaande tickets</footer>
+
+<script>
+const DATA = {"Yuki": {"brand": "Yuki", "total": 203, "clusters": [{"naam": "Peppol: facturen komen niet aan / worden niet verzonden", "filter": "Peppol / e-facturatie", "symptoom": "Verkoopfacturen verzonden via Peppol komen niet aan bij de ontvanger, of inkomende Peppol-facturen verschijnen niet in Yuki ondanks 'acknowledged' status; ook bijlagen bij Peppol-facturen ontbreken.", "ids": [432111, 432129, 432265, 432972, 433407, 433543, 433554, 433754, 433802, 434172, 432983], "actie": "uitzoeken", "advies": "Mogelijk deels structureel. Bundel als technisch onderzoekscluster voor het Peppol-team; controleer doorstroom en acknowledgements. Stuur tussentijdse statusupdate i.p.v. macro."}, {"naam": "Codabox / CARO-bestanden komen niet of foutief binnen", "filter": "Bank", "symptoom": "CARO- en Codabox-bestanden (bankafschriften, mastercard) komen niet binnen in Yuki ondanks actieve connectie, of geven foutmeldingen bij verwerking; soms belanden ze in het verkeerde dossier.", "ids": [432121, 432501, 432596, 432650, 433321, 433602, 433633, 433752, 433878, 434203, 434205, 432989], "actie": "uitzoeken", "advies": "Per dossier verifiëren of Codabox-connectie actief is. Bundel de structurele doorstroomproblemen voor het bank/koppelingen-team; statusupdate i.p.v. macro."}, {"naam": "Inconsistenties in dossier (controlegetallen, saldo)", "filter": "Boekhouding", "symptoom": "Dossiers tonen een inconsistentie die niet verdwijnt, ook niet na klikken op 'herstel'; vaak rond banktransacties, openstaande posten of na een btw-aangifte.", "ids": [432137, 432144, 432670, 432814, 433383, 433099, 434117], "actie": "uitzoeken", "advies": "Inhoudelijk-boekhoudkundig; toewijzen aan specialist. Bundel voor patroonanalyse — mogelijk onderliggende oorzaak in de verwerkingslogica."}, {"naam": "Afpunten / matchen van betalingen werkt niet correct", "filter": "Betalingen", "symptoom": "Betalingen worden niet of foutief afgepunt: Yuki matcht enkel het bedrag excl. btw, of een factuur blijft deels openstaan na automatische koppeling met de betaling.", "ids": [432276, 432623, 432687, 432755, 432971, 433466, 433509, 433694, 433763], "actie": "uitzoeken", "advies": "Mogelijk deels structureel (matching-engine). Bundel voor technisch onderzoek; per dossier verifiëren of het instelling of bug is."}, {"naam": "BTW foutief verwerkt in de boeking", "filter": "BTW", "symptoom": "Yuki boekt facturen zonder of met verkeerd btw-bedrag: het btw-bedrag verdwijnt in de boeking terwijl de factuur correct is, of btw wordt niet automatisch afgetrokken ondanks juiste instelling.", "ids": [432186, 432798, 433008, 433075, 433610, 433637, 434190, 432726], "actie": "uitzoeken", "advies": "Mogelijk een weergave- of verwerkingsbug (bedrag klopt in detail maar niet in overzicht). Bundel voor tech-onderzoek; verzamel de printscreens per dossier."}, {"naam": "Activa & afschrijvingen: foutieve tabel of berekening", "filter": "Activa & afschrijvingen", "symptoom": "De afschrijvingstabel klopt niet: verschillen tussen boekjaren, afschrijving op terreinen die niet zou mogen, of de activatabel valt niet op het juiste totaal.", "ids": [432170, 432810, 432919, 432986, 433119, 433749, 433813, 433843, 434130, 433949], "actie": "uitzoeken", "advies": "Inhoudelijke boekhoudvragen. Toewijzen aan specialist; documenteer correcte werkwijze rond activatabel en uitboeken."}, {"naam": "Koppelingen met externe software (Teamleader, Lightspeed, Shopify, Robaws, Dropbox)", "filter": "Koppelingen", "symptoom": "Externe koppelingen werken niet of onvolledig: facturen komen op verkeerde grootboekrekening binnen, transacties komen maar deels door, of de koppeling stopt met werken.", "ids": [432550, 432632, 433511, 433688, 433859, 433916, 433918, 434179, 433573], "actie": "uitzoeken", "advies": "Per koppeling verschillend; toewijzen aan API/koppelingen-team. Houd commerciële integratievragen apart van echte bugs."}, {"naam": "API-koppeling: vragen, limieten en credentials", "filter": "API", "symptoom": "Vragen over API-koppelingen (Odoo, Ponto, webservices), of de foutmelding 'Daily limit exceeded' / 'dagelijkse limiet voor synchronisaties bereikt' bij Silverfin en andere tools.", "ids": [432332, 433222, 433342, 433344, 433452, 433708, 433900, 434197, 433343], "actie": "deels macro", "advies": "De limiet-meldingen zijn deels macro-baar (uitleg + verhoging aanvragen). Echte integratievragen naar het API-team; kandidaat voor helpcenter-artikel over API-limieten."}, {"naam": "Inloggen / toegang tot dossier of portaal lukt niet", "filter": "Toegang & login", "symptoom": "Gebruikers raken niet ingelogd, lopen vast op stap 1 bij het aanmaken van een dossier, of de ondernemer geraakt niet op het portaal.", "ids": [432187, 432559, 433442, 433711, 433751], "actie": "deels macro", "advies": "Routine-toegangsvragen zijn macro-baar; echte blokkades naar tech. Kandidaat voor helpcenter-artikel over inloggen en portaaltoegang."}, {"naam": "Documenten/facturen niet zichtbaar of niet downloadbaar", "filter": "Documenten", "symptoom": "Facturen of documenten zijn niet zichtbaar in Yuki, kunnen niet gedownload worden (zip, audit-bestand, XAF), of het voorbeeld van een document ontbreekt.", "ids": [432115, 433234, 433242, 433272, 433706, 433786, 434076, 433937, 433699], "actie": "uitzoeken", "advies": "Splits per symptoom: echte zichtbaarheidsbugs naar tech, exportvragen deels macro-baar. Kandidaat voor helpcenter-artikel over exporteren."}, {"naam": "Verkoopfacturen / offertes versturen lukt niet", "filter": "Verkoop", "symptoom": "Facturen of offertes kunnen niet via e-mail naar de klant verstuurd worden, lopen vast bij beide sjablonen, of geven een foutmelding bij verzending.", "ids": [433387, 433795], "actie": "uitzoeken", "advies": "Mogelijke storing op verzending (meerdere klanten). Check prioriteit op acute spike; statusupdate i.p.v. macro."}, {"naam": "Dossieroverdracht / overname / archiveren", "filter": "Dossieroverdracht", "symptoom": "Vragen rond het overnemen, overzetten, exporteren of heractiveren van dossiers, vaak bij wisseling van boekhouder of fusie van vennootschappen.", "ids": [432773, 432778, 433130, 433201, 433629, 433739, 433787, 434133, 434199], "actie": "deels macro", "advies": "Procesvragen rond overdracht zijn deels te standaardiseren. Verwijs naar bestaand support-artikel; bundel de echte overzet-fouten naar tech."}, {"naam": "Resultaatverwerking / overgedragen winst-verlies", "filter": "Resultaatverwerking", "symptoom": "Het overgedragen verlies of de overgedragen winst klopt niet of verdwijnt niet, vaak zichtbaar als verschil tussen Yuki en Silverfin bij de resultaatverwerking.", "ids": [433341, 433882], "actie": "uitzoeken", "advies": "Complexe boekhoudkundige vragen. Toewijzen aan senior specialist; documenteer de juiste werkwijze."}, {"naam": "Fiches 281.50", "filter": "Fiches", "symptoom": "Vragen over fiches 281.50: waar de webinar te vinden is, of waarom een leverancier niet aangeduid kan worden voor opname op fiche.", "ids": [433364, 433605], "actie": "deels macro", "advies": "Deels uitleg-baar via macro + webinar-link. Kandidaat voor helpcenter-artikel; technische blokkades apart."}, {"naam": "SODA / loondocumenten komen niet binnen", "filter": "Koppelingen", "symptoom": "Maandelijkse SODA-loondocumenten of boekingsdocumenten voor lonen komen niet meer binnen in Yuki ondanks ingevuld btw-nummer.", "ids": [432927, 433929], "actie": "uitzoeken", "advies": "Koppelingsprobleem; toewijzen aan koppelingen-team. Verifieer activatie per dossier."}, {"naam": "Feature requests / suggesties", "filter": "Feature requests", "symptoom": "Gestructureerde suggesties die via het systeem binnenkomen ('I have a suggestion for...'), o.a. over openstaand saldo, bankrekeningen-UI en rapportage.", "ids": [432433, 433464, 434201, 432438], "actie": "geen macro", "advies": "Geen support-issue maar productfeedback. Routeer gebundeld naar Product i.p.v. individueel afhandelen."}]}, "Lucy": {"brand": "Lucy", "total": 41, "clusters": [{"naam": "Facturen versturen via Lucy mislukt / foutmelding", "filter": "Facturatie", "symptoom": "Het versturen van verkoopfacturen vanuit Lucy lukt niet of geeft een foutmelding, soms vastlopend bij beide sjablonen; in sommige gevallen worden facturen wél afgeleverd maar blijft de foutmelding komen.", "ids": [432441, 432709, 433735, 433861, 433910], "actie": "uitzoeken", "advies": "Mogelijke storing op verzending (meerdere klanten met hetzelfde symptoom). Check prioriteit op acute spike; bundel voor tech-onderzoek met statusupdate."}, {"naam": "Peppol via Lucy: registratie, ontvangst en bijlagen", "filter": "Peppol / e-facturatie", "symptoom": "Problemen met Peppol via Lucy: registratie lukt niet ('reeds elders geregistreerd'), Peppol-facturen komen niet aan, of bijlagen bij het Peppol-bestand ontbreken bij de ontvanger.", "ids": [433317, 433325, 433422, 434099], "actie": "uitzoeken", "advies": "Bundel als Peppol-onderzoekscluster voor Lucy; controleer registratie en bijlage-doorstroom. Statusupdate i.p.v. macro."}, {"naam": "Factuuropmaak: btw, datum, nummering en sjablonen", "filter": "Facturatie", "symptoom": "Diverse problemen bij het opmaken van facturen in Lucy: ongeldig btw-tarief bij afdrukvoorbeeld, factuurnummering die niet aanpasbaar is, of een factuur met afwijkende datum die niet aangemaakt kan worden.", "ids": [432399, 432572, 433020, 433624, 433798], "actie": "uitzoeken", "advies": "Splits per symptoom: nummering en datum zijn deels uitleg-baar, btw-fouten naar tech. Kandidaat voor helpcenter-artikel over factuuropmaak in Lucy."}, {"naam": "Documenten in Lucy: hernoemen, downloaden, onleesbaar", "filter": "Documenten", "symptoom": "Vragen rond documenten in Lucy: hoe documenten te hernoemen, een onleesbaar PDF-bestand ontvangen, of documenten niet meer in zip kunnen downloaden.", "ids": [432939, 433430, 433591, 433775], "actie": "deels macro", "advies": "Hernoemen en downloaden zijn macro-baar (uitleg). De onleesbare PDF's naar tech. Kandidaat voor helpcenter-artikel."}, {"naam": "Codabox / bank-koppeling in Lucy", "filter": "Bank", "symptoom": "Codabox-connectie in Lucy is verbroken en kan niet vernieuwd worden, of vragen over hoe de klant de Codabox-koppeling moet organiseren binnen Lucy.", "ids": [433245, 433448], "actie": "deels macro", "advies": "Verifieer abonnement (Business Pro) en connectie-status. Deels uitleg-baar; structurele problemen naar koppelingen-team."}, {"naam": "Toegang & gebruikersbeheer Lucy", "filter": "Toegang & login", "symptoom": "Nieuwe gebruiker ontvangt geen uitnodigingsmail of wachtwoord-reset, of een gebruiker kan niet meer inloggen op Lucy.", "ids": [433153, 433877], "actie": "deels macro", "advies": "Routine-beheertaken zijn macro-baar; echte mailproblemen naar tech. Kandidaat voor self-service."}, {"naam": "API-koppeling met Lucy (facturatieprogramma's)", "filter": "API", "symptoom": "Externe partijen willen een API-koppeling opzetten met Lucy (eigen facturatieprogramma, Adsolut, Shopify) en vragen credentials of documentatie.", "ids": [433458, 433573, 434170], "actie": "deels macro", "advies": "Standaardproces voor API-credentials is macro-baar. Echte integratievragen naar het API-team."}]}};
+const ACT={"macro":{t:"\u2705 Direct bulk-baar",c:"a-macro"},"deels macro":{t:"\ud83d\udfe1 Deels bulk-baar",c:"a-deels"},"uitzoeken":{t:"\ud83d\udd0d Eerst onderzoeken",c:"a-uitzoeken"},"geen macro":{t:"\u21aa\ufe0f Routeren",c:"a-route"}};
+const CHIPCOL=["#4D39D0","#25BE88","#D7417E","#4EB6D9","#F47000","#1D55CC"];
+const FD="https://yuki.freshdesk.com/a/tickets/";
+function esc(s){return String(s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));}
+
+function render(brand){
+  const d=DATA[brand];
+  const clusters=[...d.clusters].sort((a,b)=>b.ids.length-a.ids.length);
+  const geclusterd=clusters.reduce((a,c)=>a+c.ids.length,0);
+  document.getElementById("title").textContent="Openstaande tickets — "+brand;
+  document.getElementById("stats").innerHTML=
+    '<div class="stat"><div class="n">'+d.total+'</div><div class="l">openstaande tickets</div></div>'+
+    '<div class="stat"><div class="n">'+clusters.length+'</div><div class="l">clusters gevonden</div></div>'+
+    '<div class="stat"><div class="n">'+geclusterd+'</div><div class="l">tickets geclusterd</div></div>';
+  let h="";
+  clusters.forEach((c,i)=>{
+    const a=ACT[c.actie]||{t:c.actie,c:"a-route"};
+    const col=CHIPCOL[i%CHIPCOL.length];
+    const shown=c.ids.map(x=>'<a class="tid" href="'+FD+x+'" target="_blank" rel="noopener">#'+x+'</a>').join("");
+    const allIds=c.ids.map(x=>"#"+x).join(", ");
+    h+='<div class="cl"><div class="h"><div class="nm"><span class="chip" style="background:'+col+'">'+(i+1)+'</span>'+esc(c.naam)+'</div>'+
+       '<span class="act '+a.c+'">'+a.t+'</span></div>'+
+       '<div class="meta"><span>Hoofdfilter: <b>'+esc(c.filter)+'</b></span><span>Tickets: <b>'+c.ids.length+'</b></span></div>'+
+       '<div class="symp">'+esc(c.symptoom)+'</div>'+
+       '<div class="advies"><b>\ud83d\udca1 Bulk-actie advies:</b> '+esc(c.advies)+'</div>'+
+       '<div class="ids"><div class="lab">Betrokken ticket-ID\u2019s (klik om in Freshdesk te openen):</div>'+shown+
+       '<br><button class="copy" data-ids="'+esc(allIds)+'">\ud83d\udccb Kopieer alle '+c.ids.length+' ID\u2019s</button></div></div>';
+  });
+  document.getElementById("report").innerHTML=h;
+  document.querySelectorAll(".copy").forEach(b=>b.onclick=()=>{
+    navigator.clipboard.writeText(b.dataset.ids);const o=b.textContent;b.textContent="\u2713 Gekopieerd!";
+    setTimeout(()=>b.textContent=o,1500);
+  });
+}
+function setBrand(brand){
+  document.getElementById("b-Yuki").classList.toggle("on",brand==="Yuki");
+  document.getElementById("b-Lucy").classList.toggle("on",brand==="Lucy");
+  render(brand);
+}
+render("Yuki");
+</script>
+</body>
+</html>
